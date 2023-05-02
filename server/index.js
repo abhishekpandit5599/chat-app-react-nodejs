@@ -30,13 +30,14 @@ const server = app.listen(process.env.PORT, () =>
 );
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3001",
     credentials: true,
   },
 });
 
 global.onlineUsers = new Map();
 io.on("connection", (socket) => {
+  console.log("connection")
   global.chatSocket = socket;
   socket.on("add-user", (userId) => {
     onlineUsers.set(userId, socket.id);
